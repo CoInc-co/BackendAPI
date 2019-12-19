@@ -1,0 +1,30 @@
+buildscript {
+    repositories() {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.2.RELEASE")
+    }
+}
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.flex.backend'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("mysql:mysql-connector-java:8.0.18")
+    compile("org.projectlombok:lombok:1.18.8")
+}
