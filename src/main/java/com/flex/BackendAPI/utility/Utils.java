@@ -14,9 +14,6 @@ public class Utils {
     public static void log(String message, Object... objects) {
         TimeAtMoment timeAtMoment = new TimeAtMoment(System.currentTimeMillis());
 
-        for (Object object : objects)
-            message = message.replaceFirst(Constants.OBJECT_INSERT_TO_STRING_REGEX, object.toString());
-
-        System.out.println("[" + timeAtMoment + "] " + message);
+        System.out.println("[" + timeAtMoment + "] " + String.format(message, objects));
     }
 }

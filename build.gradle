@@ -4,6 +4,8 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.2.RELEASE")
+        classpath("mysql:mysql-connector-java:8.0.18")
+        classpath("org.projectlombok:lombok:1.18.8")
     }
 }
 
@@ -13,6 +15,7 @@ plugins {
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'idea'
 
 group 'com.flex.backend'
 version '1.0-SNAPSHOT'
@@ -24,7 +27,16 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("mysql:mysql-connector-java:8.0.18")
-    compile("org.projectlombok:lombok:1.18.8")
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
+
+    // https://spring.io/
+    implementation "org.springframework.boot:spring-boot-starter-web"
+
+    // https://projectlombok.org/setup/gradle
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+
+
+    runtime "mysql:mysql-connector-java:8.0.18"
 }

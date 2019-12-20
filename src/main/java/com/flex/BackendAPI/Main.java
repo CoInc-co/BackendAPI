@@ -1,5 +1,6 @@
 package com.flex.BackendAPI;
 
+import com.flex.BackendAPI.utility.Utils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,6 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Main {
     public static void main(String[] args) {
+        System.out.println("<==========[Starting API Server]==========>");
+
         // Run a separate thread to connect a singleton to database.
 
         // Initializes the backend server and opens the connection for API calls.

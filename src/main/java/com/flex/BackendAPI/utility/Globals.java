@@ -1,5 +1,7 @@
 package com.flex.BackendAPI.utility;
 
-public class Globals {
+import java.util.Random;
 
+public class Globals {
+    Random random = new Random();
 }
