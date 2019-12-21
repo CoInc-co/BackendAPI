@@ -4,10 +4,15 @@ import com.flex.BackendAPI.utility.Constants;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
 public class SampleControllers {
+    private static List<Tuple> allTuplesSubmitted = new ArrayList<>();
+    private static List<SampleObject> allSampleObjectsReturned = new ArrayList<>();
+
     /**
      * Default response with no request body or params
      */
@@ -25,10 +30,14 @@ public class SampleControllers {
         return "Hello " + name;
     }
 
-
+    /**
+     * Post example to a server with a JSON object
+     * @param tuple A JSON object of type {@link Tuple}
+     * @return      Returns a {@link SampleObject} with the total value of the tuple loaded in
+     */
+    @CrossOrigin
     @PostMapping(Constants.API_HEADER + "sample")
     public SampleObject getSampleObject(@RequestBody Tuple tuple) {
-        System.out.println("Got tuple: " + tuple.toString());
         return new SampleObject(tuple.getTotal());
     }
 
