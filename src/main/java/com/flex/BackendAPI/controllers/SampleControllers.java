@@ -1,10 +1,12 @@
 package com.flex.BackendAPI.controllers;
 
 import com.flex.BackendAPI.utility.Constants;
+import com.flex.BackendAPI.utility.Utils;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -38,7 +40,36 @@ public class SampleControllers {
     @CrossOrigin
     @PostMapping(Constants.API_HEADER + "sample")
     public SampleObject getSampleObject(@RequestBody Tuple tuple) {
-        return new SampleObject(tuple.getTotal());
+        allTuplesSubmitted.add(tuple);
+        allSampleObjectsReturned.add(new SampleObject(tuple.getTotal()));
+
+        return allSampleObjectsReturned.get(allSampleObjectsReturned.size() - 1);
+    }
+
+    /**
+     * Get example containing different types of data,
+     * including lists, and single JSON objects
+     * @return  Returns a list of generic items.
+     */
+    @CrossOrigin
+    @GetMapping(Constants.API_HEADER + "getAll")
+    public List<?> getAllData() {
+        int findFirstTotal = 0;
+        int findSecondTotal = 0;
+        int findTotal = 0;
+
+        for (int i = 0; i < allSampleObjectsReturned.size(); i++) {
+            findFirstTotal += allTuplesSubmitted.get(0).getFirst();
+            findSecondTotal += allTuplesSubmitted.get(0).getSecond();
+            findTotal += allSampleObjectsReturned.get(0).getValue();
+        }
+
+        return Arrays.asList(allTuplesSubmitted,
+                allSampleObjectsReturned,
+                Utils.createJSON("firstTotal", findFirstTotal),
+                Utils.createJSON("secondTotal", findSecondTotal),
+                Utils.createJSON("total", findTotal)
+        );
     }
 
 
@@ -47,10 +78,6 @@ public class SampleControllers {
     private static class SampleObject {
         private String id;
         private int value;
-
-        public SampleObject() {
-
-        }
 
         SampleObject(int value) {
             setValue(value);

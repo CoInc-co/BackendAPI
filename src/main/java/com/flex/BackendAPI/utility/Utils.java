@@ -2,7 +2,20 @@ package com.flex.BackendAPI.utility;
 
 import com.flex.BackendAPI.utility.structures.TimeAtMoment;
 
+import java.util.Collections;
+import java.util.Map;
+
 public class Utils {
+    /**
+     * Creates a JSON from a field name and object
+     * @param fieldName The field name of the JSON
+     * @param object    The object(s) stored in JSON
+     * @return          A JSON mapped
+     */
+    public static Map<?, ?> createJSON(String fieldName, Object object) {
+        return Collections.singletonMap(fieldName, object);
+    }
+
     /**
      * Sends a message out to console with time stamp of log execution
      *
